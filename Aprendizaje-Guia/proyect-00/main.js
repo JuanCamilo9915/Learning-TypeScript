@@ -36,6 +36,34 @@ var usuarioPN = Roles3.InvitadoPN;
 var visitantePN = Roles3[3];
 var pruebaVariable = 'Hellow World';
 pruebaVariable.toLocaleLowerCase; //Aquí se estaaplicando el casting
+var personasObj = {
+    nombre: 'Juan',
+    edad: 22
+};
+personasObj = {
+    nombre: 'Paola',
+    edad: 27
+};
+var personasObj2 = {
+    nit: 1125698966,
+    nomMarca: 'Mazda',
+    mostrarFundador: function () {
+        return 'Kojito Ojiro';
+    },
+    mostrarNit: function () {
+        return this.nit;
+    }
+};
+var nuevaPersona = {
+    nombre: 'Pepito Perez',
+    edad: 33,
+    //estatura: 1.78, --> Quedo como opcional
+    mostrarInfoPersona: function () {
+        return "Hola " + this.nombre;
+    }
+};
+//Unión de Tipos de Datos
+var pagosNomina = 3654;
 console.log(saludo);
 console.log('Prueba');
 console.log(usuario);
@@ -46,6 +74,7 @@ console.log("\n " + usuarioP);
 console.log(visitanteP);
 console.log("\n " + usuarioPN);
 console.log(visitantePN);
+console.log("Uni\u00F3n de Tipos de Datos: " + typeof pagosNomina);
 /********************************************************************************************************************/
 function saludar() {
     alert('Hellow People');

@@ -26,6 +26,46 @@ let visitantePN: String = Roles3[3];
 let pruebaVariable:any = 'Hellow World';
 (<String>pruebaVariable).toLocaleLowerCase;//Aquí se estaaplicando el casting
 
+let personasObj = {
+    nombre: 'Juan',
+    edad: 22
+}
+
+personasObj = {
+    nombre: 'Paola',
+    edad: 27
+}
+
+let personasObj2: {nit: number, nomMarca: String,mostrarFundador: () => String, mostrarNit: () => number} = {
+    nit: 1125698966,
+    nomMarca: 'Mazda',
+    mostrarFundador(){
+        return 'Kojito Ojiro';
+    },
+    mostrarNit(){
+        return this.nit
+    }
+}
+
+type Persona = {//Obj Personalizado
+    nombre: String;
+    edad: number;
+    estatura?: number;
+    mostrarInfoPersona: () => String;
+}
+
+let nuevaPersona: Persona = {
+    nombre: 'Pepito Perez',
+    edad: 33,
+    //estatura: 1.78, --> Quedo como opcional
+    mostrarInfoPersona(){
+        return `Hola ${this.nombre}`
+    }
+}
+
+//Unión de Tipos de Datos
+let pagosNomina: String | number | null | undefined = 3654;
+
 console.log(saludo);
 console.log('Prueba');
 console.log(usuario);
@@ -38,6 +78,8 @@ console.log(visitanteP);
 
 console.log(`\n ${usuarioPN}`);
 console.log(visitantePN);
+
+console.log(`Unión de Tipos de Datos: ${typeof pagosNomina}`);
 
 /********************************************************************************************************************/
 function saludar():void{
