@@ -30,7 +30,7 @@ class Carro{
 
 }
 
-let myCar = new Carro('BMW',2022,true,13);
+let myCar = new Carro('BMW',2022,true);
 /*console.log(`my car: ${myCar.marca}, ${myCar.modelo}, ${myCar.enciende}`);
 
 let myCar2 = new Carro('Audi',2000,false);
