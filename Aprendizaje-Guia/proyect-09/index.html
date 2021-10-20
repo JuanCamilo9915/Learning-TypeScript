@@ -9,7 +9,15 @@
 <body>
     <h1>Proyect Lite-Serve</h1>
     <!-------------Importando Código JS------------->
-        <script src='main.js'></script>
+        <script src='node_modules/systemjs/dist/system.js'></script>
+        <script>
+            //Configuraciones correspondientes a la librería SystemJS, en su versión 0.19.41
+            SystemJS.config({
+                baseUrl: '/',
+                defaultJSExtensions: true
+            });
+            SystemJS.import('main.js');
+        </script>
     <!---------------------------------------------->
 </body>
 </html>
