@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoradores en TypeScript</title>
+</head>
+<body>
+    <h1>Decoradores en TypeScript</h1>
+    <h2>Utilizando la librería de SystemJS versión 0.19.41</h2>
+    <!-------------Importando Código JS------------->
+    <script src='node_modules/systemjs/dist/system.js'></script>
+    <script>
+        //Configuraciones correspondientes a la librería SystemJS, en su versión 0.19.41
+        SystemJS.config({
+            baseUrl: '/',
+            defaultJSExtensions: true
+        });
+        SystemJS.import('main.js');
+    </script>
+    <!---------------------------------------------->
+</body>
+</html>
