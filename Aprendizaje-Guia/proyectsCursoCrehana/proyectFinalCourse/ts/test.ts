@@ -1,1 +1,2 @@
-console.log('Hellow TypeScript');
+alert('Hellow TypeScript');
+
