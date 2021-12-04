@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,41 +9,59 @@
     <!-------------Importando Estilos------------->
     <link rel='stylesheet' href='./styles/style-index.css'>
 </head>
+
 <body>
-    <h1>Gestión de Gastos Personales</h1>
+    <!--------------------------------------------------Header-------------------------------------------------->
+    <header>
+        <h1>Gestión de Gastos Personales</h1>
+    </header>
+    <!--------------------------------------------------Main-------------------------------------------------->
+    <main>
+        <!--Captura de Datos--->
+        <section>
+            <!--Campos de Texto--->
+            <div>
+                <label>Eti 1</label>
+                <input type="text">
 
-    <label>Eti 1</label>
-    <input type="text">
+                <br><br>
 
-    <br><br>
+                <label>Eti 2</label>
+                <input type="text">
+            </div>
+            <!--Btn--->
+            <div>
+                <button>Registrar</button>
+            </div>
+        </section>
+        <!--Visualización de los Datos--->
+        <section>
+            <table>
+                <thead>
+                    <th>Tipo</th>
+                    <th>Detalle</th>
+                    <th>Valor($)</th>
+                </thead>
 
-    <label>Eti 2</label>
-    <input type="text">
-
-    <br>
-
-    <button>Registrar</button>
-
-    <br><br><br>
-
-    <table>
-        <thead>
-            <th>Tipo</th>
-            <th>Detalle</th>
-            <th>Valor($)</th>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>Tipo 1</td>
-                <td>Detalle 1</td>
-                <td>Valor 1</td>
-            </tr>
-        </tbody>
-    </table>
+                <tbody>
+                    <tr>
+                        <td>Tipo 1</td>
+                        <td>Detalle 1</td>
+                        <td>Valor 1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <!--------------------------------------------------Footer-------------------------------------------------->
+    <footer>
+        <p>Copyright © JuanCamiloDev 2021</p>
+    </footer>
+    <!---------------------------------------------------------------------------------------------------------->
 
     <!-------------Importando Código JS------------->
     <script src="./js/test.js"></script>
     <!---------------------------------------------->
 </body>
+
 </html>
