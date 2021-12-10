@@ -13,18 +13,24 @@
 <body>
     <!--------------------------------------------------Header-------------------------------------------------->
     <header>
-        <h1>Gestión de Gastos Personales</h1>
+        <div class="title">
+            <h1>Gestión de Gastos Personales</h1>
+        </div>
     </header>
     <!--------------------------------------------------Main-------------------------------------------------->
     <main>
         <!--Captura de Datos--->
-        <section>
+        <section class="set-datos">
             <!--Campos de Texto--->
             <div>
                 <label>Eti 1</label>
                 <input type="text">
 
-                <br><br>
+                <select name="" id="">
+                    <option value="">Seleccione el Tipo</option>
+                    <option value="">1-Ingreso</option>
+                    <option value="">2-Gasto</option>
+                </select>
 
                 <label>Eti 2</label>
                 <input type="text">
@@ -35,7 +41,7 @@
             </div>
         </section>
         <!--Visualización de los Datos--->
-        <section>
+        <section class="get-datos">
             <table>
                 <thead>
                     <th>Tipo</th>
