@@ -40,14 +40,15 @@ main{
 
 .set-datos{
     width: inherit;
-    height: 13em;
+    /*height: 13em/2;*/
+    height: 25vh;/*Corresponde a una parte del alto del main (70vh)*/
     position: relative;
     background-color: green;
 }
 
 .get-datos{
     width: inherit;
-    height: 20em;
+    height: 45vh;/*Corresponde a una parte del alto del main (70vh)*/
     position: relative;
     background-color: yellow;
 }
