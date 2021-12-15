@@ -1,2 +1,3 @@
 "use strict";
-alert('Hellow TypeScript');
+//alert('Hellow TypeScript');
+console.log('Hellow TypeScript');

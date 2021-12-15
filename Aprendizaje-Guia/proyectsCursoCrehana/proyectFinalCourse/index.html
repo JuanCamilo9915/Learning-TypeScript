@@ -22,27 +22,27 @@
         <!--Captura de Datos--->
         <section class="set-datos">
             <!--Campos de Texto--->
-            <div>
-                <label>Eti 1</label>
-                <input type="text">
+            <div class="set-datos-campos-texto">
+                <label class="eti-campos" id="eti-1">Eti 1</label>
+                <input type="text" id="uno" placeholder="Detalle">
 
-                <select name="" id="">
-                    <option value="">Seleccione el Tipo</option>
-                    <option value="">1-Ingreso</option>
-                    <option value="">2-Gasto</option>
+                <select name="" id="dos">
+                    <option value="0">Seleccione el Tipo</option>
+                    <option value="1">1-Ingreso</option>
+                    <option value="2">2-Gasto</option>
                 </select>
 
-                <label>Eti 2</label>
-                <input type="text">
+                <label class="eti-campos" id="eti-3">Eti 2</label>
+                <input type="text" id="tres" placeholder="$$$">
             </div>
             <!--Btn--->
-            <div>
+            <div class="set-datos-btn">
                 <button>Registrar</button>
             </div>
         </section>
         <!--Visualización de los Datos--->
         <section class="get-datos">
-            <table>
+            <table id="get-table">
                 <thead>
                     <th>Tipo</th>
                     <th>Detalle</th>
@@ -57,6 +57,23 @@
                     </tr>
                 </tbody>
             </table>
+
+           <!--Total de Ingresos Netos-->
+           <table>
+            <thead>
+                <th>Total Ingresos</th>
+                <th>Total Gastos</th>
+                <th>Total Ingresos Netos</th>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>$$$</td>
+                    <td>$$$</td>
+                    <td>$$$</td>
+                </tr>
+            </tbody>
+           </table>
         </section>
     </main>
     <!--------------------------------------------------Footer-------------------------------------------------->
