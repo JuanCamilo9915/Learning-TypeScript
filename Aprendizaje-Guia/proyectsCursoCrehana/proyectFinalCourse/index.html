@@ -21,27 +21,30 @@
     <main>
         <!--Captura de Datos--->
         <section class="set-datos">
-            <!--Campos de Texto--->
-            <div class="set-datos-campos-texto">
-                <label class="eti-campos" id="eti-1">Eti 1</label>
-                <input type="text" id="uno" placeholder="Detalle">
+            <form id="form-gastos-personales">
+                <!--Campos de Texto--->
+                <div class="set-datos-campos-texto">
+                    <label for="uno" class="eti-campos" id="eti-1">Eti 1</label>
+                    <input type="text" id="uno" name="detalle" placeholder="Detalle">
 
-                <select name="" id="dos">
-                    <option value="0">Seleccione el Tipo</option>
-                    <option value="1">1-Ingreso</option>
-                    <option value="2">2-Gasto</option>
-                </select>
+                    <select name="option" id="dos">
+                        <option value="0">Seleccione el Tipo</option>
+                        <option value="1">1-Ingreso</option>
+                        <option value="2">2-Gasto</option>
+                    </select>
 
-                <label class="eti-campos" id="eti-3">Eti 2</label>
-                <input type="text" id="tres" placeholder="$$$">
-            </div>
-            <!--Btn--->
-            <div class="set-datos-btn">
-                <button>Registrar</button>
-            </div>
+                    <label for="tres" class="eti-campos" id="eti-3">Eti 2</label>
+                    <input type="text" id="tres" name="valor" placeholder="$$$">
+                </div>
+                <!--Btn--->
+                <div class="set-datos-btn">
+                    <button type="submit" onclick="recibirDatos();">Registrar</button>
+                </div>
+            </form>
         </section>
         <!--Visualización de los Datos--->
         <section class="get-datos">
+            <!--Mostrando Datos-->
             <table id="get-table">
                 <thead>
                     <th>Tipo</th>
@@ -50,30 +53,33 @@
                 </thead>
 
                 <tbody>
+                    <!--
                     <tr>
                         <td>Tipo 1</td>
                         <td>Detalle 1</td>
                         <td>Valor 1</td>
-                    </tr>
+                    </tr>-->
                 </tbody>
             </table>
 
-           <!--Total de Ingresos Netos-->
-           <table>
-            <thead>
-                <th>Total Ingresos</th>
-                <th>Total Gastos</th>
-                <th>Total Ingresos Netos</th>
-            </thead>
+            <!--Total de Ingresos Netos-->
+            <!--Tenerlo en cuenta: https://www.youtube.com/watch?v=mIqk71QQZMU,
+            repo de ejemplo: https://github.com/HemisferioDev/exercise-sortarrayts-->
+            <table id="get-table-2">
+                <thead>
+                    <th>Total Ingresos</th>
+                    <th>Total Gastos</th>
+                    <th>Total Ingresos Netos</th>
+                </thead>
 
-            <tbody>
-                <tr>
-                    <td>$$$</td>
-                    <td>$$$</td>
-                    <td>$$$</td>
-                </tr>
-            </tbody>
-           </table>
+                <tbody>
+                    <tr>
+                        <td>$$$</td>
+                        <td>$$$</td>
+                        <td>$$$</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     </main>
     <!--------------------------------------------------Footer-------------------------------------------------->

@@ -104,20 +104,24 @@ main{
     font-size: 150%;
 }
 
+#form-gastos-personales{
+    width: inherit;
+    height: inherit;
+}
+
 /*Muestran Datos en la Tabla*/
 .get-datos{
     width: inherit;
     height: 45vh;/*Corresponde a una parte del alto del main (70vh)*/
     position: relative;
     overflow: auto;
-    background-color: yellow;
 }
 
 #get-table{
     position: absolute;
     top: 10%;    
     left: 0%;
-    right: 0%;
+    right: 50%;
     bottom: 0%;
     margin: auto;
     font-size: 150%;
@@ -128,8 +132,30 @@ table, th, td{
     border: 1px solid;
 }
 
+/*Tabla # 2*/
+#get-table-2{
+    position: absolute;
+    top: 10%;    
+    left: 50%;
+    right: 0%;
+    bottom: 0%;
+    margin: auto;
+    font-size: 150%;
+}
+
 footer{
     width: 100vw;
     height: 15vh;
-    background-color: burlywood;
+    position: relative;
+    /*background-color: burlywood;*/
+}
+
+footer > p{
+    position: absolute;
+    top: 30%;    
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    margin: auto;
+    font-size: 150%;
 }
