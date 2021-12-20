@@ -9,17 +9,18 @@ var btn = document.getElementById('btn-submit');
 //Clase recibirDatos
 var RecibirDatos = /** @class */ (function () {
     //Constructor
-    /*Forma # 1
-    constructor(detalle?: string, option?: string, valor?: number) {
-        this.detalle = detalle;
-        this.option = option;
-        this.valor = valor;
+    //Forma # 1
+    /*constructor(detalleP?: string, optionP?: string, valorP?: number) {
+        this.detalleUsu = detalleP;
+        this.optionUsu = optionP;
+        this.valorUsu = valorP;
     }*/
     //Forma # 2
     function RecibirDatos(gastosPersonalesP) {
         this.detalleUsu = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.detalleUsuA;
         this.optionUsu = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.optionUsuA;
         this.valorUsu = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.valorUsuA;
+        this.totalSumaAcomulado = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.totalSumaAcumuladoUsuA;
     }
     Object.defineProperty(RecibirDatos.prototype, "obtenerDetalle", {
         //Métodos Get y Set
@@ -70,11 +71,7 @@ var RecibirDatos = /** @class */ (function () {
         this.enviarDetalle = detalle.value;
         this.enviarOption = option.value;
         this.enviarValor = Number(valor.value);
-        var suma = Number(valor.value);
-        suma += suma;
         console.log("Detalle: ".concat(this.obtenerDetalle, ", Opcci\u00F3n: ").concat(this.obtenerOption, ", valor: ").concat(this.obtenerValor));
-        this.enviarValor = suma;
-        console.log("La suma es: ".concat(this.obtenerValor));
     };
     return RecibirDatos;
 }());

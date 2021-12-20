@@ -12,6 +12,7 @@ type DatosGastos = {
     detalleUsuA: String;
     optionUsuA: string;
     valorUsuA: number;
+    totalSumaAcumuladoUsuA: number;
 };
 
 //Clase recibirDatos
@@ -20,13 +21,14 @@ class RecibirDatos {
     private detalleUsu: String | any;
     private optionUsu: string | any;
     private valorUsu: number | any;
+    private totalSumaAcomulado: number | any;
 
     //Constructor
-    /*Forma # 1
-    constructor(detalle?: string, option?: string, valor?: number) {
-        this.detalle = detalle;
-        this.option = option;
-        this.valor = valor;
+    //Forma # 1
+    /*constructor(detalleP?: string, optionP?: string, valorP?: number) {
+        this.detalleUsu = detalleP;
+        this.optionUsu = optionP;
+        this.valorUsu = valorP;
     }*/
 
     //Forma # 2
@@ -34,6 +36,7 @@ class RecibirDatos {
         this.detalleUsu = gastosPersonalesP?.detalleUsuA;
         this.optionUsu = gastosPersonalesP?.optionUsuA;
         this.valorUsu = gastosPersonalesP?.valorUsuA;
+        this.totalSumaAcomulado = gastosPersonalesP?.totalSumaAcumuladoUsuA;
     }
 
     //Métodos Get y Set
@@ -68,14 +71,8 @@ class RecibirDatos {
         this.enviarOption = option.value;
         this.enviarValor = Number(valor.value);
 
-        let suma: number = Number(valor.value);
-        suma += suma;
-
         console.log(`Detalle: ${this.obtenerDetalle}, Opcción: ${this.obtenerOption}, valor: ${this.obtenerValor}`);
 
-        this.enviarValor = suma;
-
-        console.log(`La suma es: ${this.obtenerValor}`);
     }
 
 }
