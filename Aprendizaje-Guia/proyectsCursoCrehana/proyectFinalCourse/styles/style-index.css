@@ -6,8 +6,6 @@
 	box-sizing: border-box;
 	font-family: 'Times New Roman';
     text-align: center;
-	/*background-color: green;
-    color: white;*/
 }
 
 header{
@@ -150,6 +148,7 @@ footer{
     /*background-color: burlywood;*/
 }
 
+/*-------------------------Pie de Página-------------------------*/
 footer > p{
     position: absolute;
     top: 30%;    

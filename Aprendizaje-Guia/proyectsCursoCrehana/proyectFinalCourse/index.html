@@ -21,26 +21,29 @@
     <main>
         <!--Captura de Datos--->
         <section class="set-datos">
-            <form id="form-gastos-personales">
-                <!--Campos de Texto--->
-                <div class="set-datos-campos-texto">
-                    <label for="uno" class="eti-campos" id="eti-1">Eti 1</label>
-                    <input type="text" id="uno" name="detalle" placeholder="Detalle">
 
-                    <select name="option" id="dos">
-                        <option value="0">Seleccione el Tipo</option>
-                        <option value="1">1-Ingreso</option>
-                        <option value="2">2-Gasto</option>
-                    </select>
+            <!--Campos de Texto--->
+            <div class="set-datos-campos-texto">
 
-                    <label for="tres" class="eti-campos" id="eti-3">Eti 2</label>
-                    <input type="text" id="tres" name="valor" placeholder="$$$">
-                </div>
-                <!--Btn--->
-                <div class="set-datos-btn">
-                    <button type="submit" onclick="recibirDatos();">Registrar</button>
-                </div>
-            </form>
+                <label for="uno" class="eti-campos" id="eti-1">Eti 1</label>
+                <input type="text" id="uno" name="detalle" placeholder="Detalle">
+
+                <select name="option" id="dos">
+                    <option value="0">Seleccione el Tipo</option>
+                    <option value="1">1-Ingreso</option>
+                    <option value="2">2-Gasto</option>
+                </select>
+
+                <label for="tres" class="eti-campos" id="eti-3">Eti 2</label>
+                <input type="text" id="tres" name="valor" placeholder="$$$">
+
+            </div>
+
+            <!--Btn--->
+            <div class="set-datos-btn">
+                <button id="btn-submit">Registrar</button>
+            </div>
+
         </section>
         <!--Visualización de los Datos--->
         <section class="get-datos">
@@ -89,7 +92,7 @@
     <!---------------------------------------------------------------------------------------------------------->
 
     <!-------------Importando Código JS------------->
-    <script src="./js/test.js"></script>
+    <script src="./js/recibirDatos.js"></script>
     <!---------------------------------------------->
 </body>
 
