@@ -1,3 +1,6 @@
+//Importando Módulos
+import { ProcesandoDatosUsu } from './DB.js';
+
 /*Seleccionan los campos de texto.
 /*Declarando y definiendo las siguientes variables.*/
 const detalle = document.getElementById('uno') as HTMLInputElement;//Utilizando Aserción de tipo
@@ -7,82 +10,50 @@ const valor = document.getElementById('tres') as HTMLInputElement;
 //Btn
 const btn = document.getElementById('btn-submit') as HTMLButtonElement;
 
-//Alias de Tipos para el Constructor de la Clase RecibirDatos
-type DatosGastos = {
-    detalleUsuA: String;
-    optionUsuA: string;
-    valorUsuA: number;
-    totalSumaAcumuladoUsuA: number;
-};
-
 //Clase recibirDatos
 class RecibirDatos {
-    //Atributos
-    private detalleUsu: String | any;
-    private optionUsu: string | any;
-    private valorUsu: number | any;
-    private totalSumaAcomulado: number | any;
-
-    //Constructor
-    //Forma # 1
-    /*constructor(detalleP?: string, optionP?: string, valorP?: number) {
-        this.detalleUsu = detalleP;
-        this.optionUsu = optionP;
-        this.valorUsu = valorP;
-    }*/
-
-    //Forma # 2
-    constructor(gastosPersonalesP?: DatosGastos) {
-        this.detalleUsu = gastosPersonalesP?.detalleUsuA;
-        this.optionUsu = gastosPersonalesP?.optionUsuA;
-        this.valorUsu = gastosPersonalesP?.valorUsuA;
-        this.totalSumaAcomulado = gastosPersonalesP?.totalSumaAcumuladoUsuA;
-    }
-
-    //Métodos Get y Set
-    public get obtenerDetalle(): string {
-        return this.detalleUsu;
-    }
-
-    public set enviarDetalle(detalleP: string) {
-        this.detalleUsu = detalleP;
-    }
-
-    public get obtenerOption(): string {
-        return this.optionUsu;
-    }
-
-    public set enviarOption(optionP: string) {
-        this.optionUsu = optionP;
-    }
-
-    public get obtenerValor(): number {
-        return this.valorUsu;
-    }
-
-    public set enviarValor(valorP: number) {
-        this.valorUsu = valorP;
+    //Método que inicia el evento de captura de datos
+    public startApp(): void {
+        //Escuchando el evento click del btn
+        btn.addEventListener('click', this.recibiendoDatos);
     }
 
     //Método que recibe los datos ingresados por el usuario
-    public recibiendoDatos(): void | any {
-        //Utilizando los métodos set y get de los atributos de está clase
-        this.enviarDetalle = detalle.value;
-        this.enviarOption = option.value;
-        this.enviarValor = Number(valor.value);
+    public recibiendoDatos(): void {
 
-        console.log(`Detalle: ${this.obtenerDetalle}, Opcción: ${this.obtenerOption}, valor: ${this.obtenerValor}`);
+        let noEspacios = new RegExp(' ','g');
+        let detalleU: String = detalle.value.replace(noEspacios, '')
+
+        console.log(`Detalle: ${detalleU}, Opcción: ${option.value}, valor: ${Number(valor.value)}`);
+
+        //Instanciando el obj de la clase ProcesandoDatosUsu
+        const objExportDatosUsu = new ProcesandoDatosUsu();
+
+        //Enviando los datos con sus métodos set
+        objExportDatosUsu.enviarDetalle = String(detalleU);
+        objExportDatosUsu.enviarOption = option.value;
+        objExportDatosUsu.enviarValor = Number(valor.value);
+
+        //llamando al método guardar del obj ProcesandoDatosUsu
+        //objExportDatosUsu.guardarDatos();
+        objExportDatosUsu.keyLocalStorage();
+
+        //Limpiando los campos de texto
+        detalle.value = '';
+        option.value = '';
+        valor.value = '';
+
+        //Mostrar los datos enviados del LocalStorage
+        console.log(`Detalles: ${objExportDatosUsu.obtenerDetalle},
+        Opciones:  ${objExportDatosUsu.obtenerOption},
+        Valor($$$): ${objExportDatosUsu.obtenerValor}`);
 
     }
 
 }
 
-//Escuchando el evento click del btn
-btn.addEventListener('click', (e: MouseEvent) => {
-    e.preventDefault();
+//Iniciando App
+//Instanciando el obj de la clase
+const objRecibirDatos = new RecibirDatos();
 
-    //Instanciando el obj de la clase
-    const objRecibirDatos = new RecibirDatos();
-
-    objRecibirDatos.recibiendoDatos();
-});
+objRecibirDatos.startApp();

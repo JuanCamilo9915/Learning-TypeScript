@@ -1,84 +1,57 @@
-"use strict";
-/*Seleccionan los campos de texto.
-/*Declarando y definiendo las siguientes variables.*/
-var detalle = document.getElementById('uno'); //Utilizando Aserción de tipo
-var option = document.getElementById('dos');
-var valor = document.getElementById('tres');
-//Btn
-var btn = document.getElementById('btn-submit');
-//Clase recibirDatos
-var RecibirDatos = /** @class */ (function () {
-    //Constructor
-    //Forma # 1
-    /*constructor(detalleP?: string, optionP?: string, valorP?: number) {
-        this.detalleUsu = detalleP;
-        this.optionUsu = optionP;
-        this.valorUsu = valorP;
-    }*/
-    //Forma # 2
-    function RecibirDatos(gastosPersonalesP) {
-        this.detalleUsu = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.detalleUsuA;
-        this.optionUsu = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.optionUsuA;
-        this.valorUsu = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.valorUsuA;
-        this.totalSumaAcomulado = gastosPersonalesP === null || gastosPersonalesP === void 0 ? void 0 : gastosPersonalesP.totalSumaAcumuladoUsuA;
-    }
-    Object.defineProperty(RecibirDatos.prototype, "obtenerDetalle", {
-        //Métodos Get y Set
-        get: function () {
-            return this.detalleUsu;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(RecibirDatos.prototype, "enviarDetalle", {
-        set: function (detalleP) {
-            this.detalleUsu = detalleP;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(RecibirDatos.prototype, "obtenerOption", {
-        get: function () {
-            return this.optionUsu;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(RecibirDatos.prototype, "enviarOption", {
-        set: function (optionP) {
-            this.optionUsu = optionP;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(RecibirDatos.prototype, "obtenerValor", {
-        get: function () {
-            return this.valorUsu;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(RecibirDatos.prototype, "enviarValor", {
-        set: function (valorP) {
-            this.valorUsu = valorP;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    //Método que recibe los datos ingresados por el usuario
-    RecibirDatos.prototype.recibiendoDatos = function () {
-        //Utilizando los métodos set y get de los atributos de está clase
-        this.enviarDetalle = detalle.value;
-        this.enviarOption = option.value;
-        this.enviarValor = Number(valor.value);
-        console.log("Detalle: ".concat(this.obtenerDetalle, ", Opcci\u00F3n: ").concat(this.obtenerOption, ", valor: ").concat(this.obtenerValor));
+System.register(["./DB.js"], function (exports_1, context_1) {
+    "use strict";
+    var DB_js_1, detalle, option, valor, btn, RecibirDatos, objRecibirDatos;
+    var __moduleName = context_1 && context_1.id;
+    return {
+        setters: [
+            function (DB_js_1_1) {
+                DB_js_1 = DB_js_1_1;
+            }
+        ],
+        execute: function () {
+            /*Seleccionan los campos de texto.
+            /*Declarando y definiendo las siguientes variables.*/
+            detalle = document.getElementById('uno'); //Utilizando Aserción de tipo
+            option = document.getElementById('dos');
+            valor = document.getElementById('tres');
+            //Btn
+            btn = document.getElementById('btn-submit');
+            //Clase recibirDatos
+            RecibirDatos = /** @class */ (function () {
+                function RecibirDatos() {
+                }
+                //Método que inicia el evento de captura de datos
+                RecibirDatos.prototype.startApp = function () {
+                    //Escuchando el evento click del btn
+                    btn.addEventListener('click', this.recibiendoDatos);
+                };
+                //Método que recibe los datos ingresados por el usuario
+                RecibirDatos.prototype.recibiendoDatos = function () {
+                    var noEspacios = new RegExp(' ', 'g');
+                    var detalleU = detalle.value.replace(noEspacios, '');
+                    console.log("Detalle: ".concat(detalleU, ", Opcci\u00F3n: ").concat(option.value, ", valor: ").concat(Number(valor.value)));
+                    //Instanciando el obj de la clase ProcesandoDatosUsu
+                    var objExportDatosUsu = new DB_js_1.ProcesandoDatosUsu();
+                    //Enviando los datos con sus métodos set
+                    objExportDatosUsu.enviarDetalle = String(detalleU);
+                    objExportDatosUsu.enviarOption = option.value;
+                    objExportDatosUsu.enviarValor = Number(valor.value);
+                    //llamando al método guardar del obj ProcesandoDatosUsu
+                    //objExportDatosUsu.guardarDatos();
+                    objExportDatosUsu.keyLocalStorage();
+                    //Limpiando los campos de texto
+                    detalle.value = '';
+                    option.value = '';
+                    valor.value = '';
+                    //Mostrar los datos enviados del LocalStorage
+                    console.log("Detalles: ".concat(objExportDatosUsu.obtenerDetalle, ",\n        Opciones:  ").concat(objExportDatosUsu.obtenerOption, ",\n        Valor($$$): ").concat(objExportDatosUsu.obtenerValor));
+                };
+                return RecibirDatos;
+            }());
+            //Iniciando App
+            //Instanciando el obj de la clase
+            objRecibirDatos = new RecibirDatos();
+            objRecibirDatos.startApp();
+        }
     };
-    return RecibirDatos;
-}());
-//Escuchando el evento click del btn
-btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    //Instanciando el obj de la clase
-    var objRecibirDatos = new RecibirDatos();
-    objRecibirDatos.recibiendoDatos();
 });
