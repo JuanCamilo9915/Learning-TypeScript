@@ -21,8 +21,9 @@ class RecibirDatos {
     //Método que recibe los datos ingresados por el usuario
     public recibiendoDatos(): void {
 
-        let noEspacios = new RegExp(' ','g');
-        let detalleU: String = detalle.value.replace(noEspacios, '')
+        //Eliminan los espacios del string Detalle
+        let noEspacios = new RegExp(' ','g');//Hace uso de una expresión regular
+        let detalleU: String = detalle.value.replace(noEspacios, '');
 
         console.log(`Detalle: ${detalleU}, Opcción: ${option.value}, valor: ${Number(valor.value)}`);
 
@@ -35,8 +36,7 @@ class RecibirDatos {
         objExportDatosUsu.enviarValor = Number(valor.value);
 
         //llamando al método guardar del obj ProcesandoDatosUsu
-        //objExportDatosUsu.guardarDatos();
-        objExportDatosUsu.keyLocalStorage();
+        objExportDatosUsu.guardarDatos();
 
         //Limpiando los campos de texto
         detalle.value = '';

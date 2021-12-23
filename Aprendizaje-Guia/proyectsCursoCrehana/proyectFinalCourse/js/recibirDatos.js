@@ -27,7 +27,8 @@ System.register(["./DB.js"], function (exports_1, context_1) {
                 };
                 //Método que recibe los datos ingresados por el usuario
                 RecibirDatos.prototype.recibiendoDatos = function () {
-                    var noEspacios = new RegExp(' ', 'g');
+                    //Eliminan los espacios del string Detalle
+                    var noEspacios = new RegExp(' ', 'g'); //Hace uso de una expresión regular
                     var detalleU = detalle.value.replace(noEspacios, '');
                     console.log("Detalle: ".concat(detalleU, ", Opcci\u00F3n: ").concat(option.value, ", valor: ").concat(Number(valor.value)));
                     //Instanciando el obj de la clase ProcesandoDatosUsu
@@ -37,8 +38,7 @@ System.register(["./DB.js"], function (exports_1, context_1) {
                     objExportDatosUsu.enviarOption = option.value;
                     objExportDatosUsu.enviarValor = Number(valor.value);
                     //llamando al método guardar del obj ProcesandoDatosUsu
-                    //objExportDatosUsu.guardarDatos();
-                    objExportDatosUsu.keyLocalStorage();
+                    objExportDatosUsu.guardarDatos();
                     //Limpiando los campos de texto
                     detalle.value = '';
                     option.value = '';

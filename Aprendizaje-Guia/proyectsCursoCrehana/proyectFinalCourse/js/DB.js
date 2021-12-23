@@ -61,54 +61,53 @@ System.register([], function (exports_1, context_1) {
                 //Método que almacena los datos en LocalStorage
                 ProcesandoDatosUsu.prototype.guardarDatos = function () {
                     //Guardando datos en localStorage
-                    localStorage.setItem(this.obtenerDetalle, this.obtenerDetalle);
+                    var datosUsu = []; //Se declara el arreglo datosUsu
+                    //Almacenan los datos en el arreglo
+                    //datosUsu.push(this.obtenerDetalle);
                     switch (this.obtenerOption) {
                         case '1':
-                            localStorage.setItem(this.obtenerDetalle + 'Ingreso', 'Ingreso');
+                            //datosUsu.push('Ingreso');        
                             break;
                         default:
-                            localStorage.setItem(this.obtenerDetalle + 'Gasto', 'Gasto');
+                            //datosUsu.push('Gasto');
                             break;
                     }
-                    localStorage.setItem(this.obtenerDetalle + 'Valor', String(this.obtenerValor));
+                    //datosUsu.push(this.obtenerValor);
+                    //Se almacena el arreglo con los datos en el LocalStorage
+                    //localStorage.setItem(`datosUsu${this.obtenerDetalle}`, datosUsu);
+                    console.log("key: ".concat(localStorage.getItem(String(localStorage.key(0)))));
                     //Enviando los datos del LocalStorage a la tabla
                     this.traerDatos();
                 };
                 //Método que trae los datos del LocalStorage
                 ProcesandoDatosUsu.prototype.traerDatos = function () {
                     //Trayendo datos del localStorage
-                    /*this.enviarDetalle = String(localStorage.getItem('ServiciosPublicos'));
-                    this.enviarOption = String(localStorage.getItem('ServiciosPublicosGasto'));*/
-                    this.enviarDetalle = String(localStorage.key(0));
-                    this.enviarOption = String(localStorage.key(1));
-                    //Convirtiendo el tipo de dato de valorLocalStorage
-                    /*this.enviarValor = parseInt(String(localStorage.getItem('ServiciosPublicosValor')), 10);*/
-                    this.enviarValor = parseInt(String(localStorage.key(2)));
-                };
-                ProcesandoDatosUsu.prototype.keyLocalStorage = function () {
-                    var datosUsu = [];
-                    datosUsu.push(this.obtenerDetalle);
-                    datosUsu.push(this.obtenerOption);
-                    datosUsu.push(this.obtenerValor);
-                    localStorage.setItem("datosUsu".concat(this.obtenerDetalle), datosUsu);
-                    console.log("key: ".concat(localStorage.getItem(String(localStorage.key(0)))));
-                    //Guardando datos en localStorage
-                    /*localStorage.setItem(this.obtenerDetalle, this.obtenerDetalle);
-            
-                    switch (this.obtenerOption) {
-                        case '1':
-                            localStorage.setItem(this.obtenerDetalle + 'Ingreso', 'Ingreso');
-                            break;
-            
-                        default:
-                            localStorage.setItem(this.obtenerDetalle + 'Gasto', 'Gasto');
-                            break;
+                    var strSeparadoLocalStorage = []; //Creando el array para separar los datos del LocalStorage
+                    var strSeparadoF = []; //Creando la matriz que almacenará los datos del LocalStorage
+                    //Recorriendo el LocalStorage
+                    for (var i = 0; i < localStorage.length; i++) {
+                        //Separando los datos por cada posición del LocalStorage
+                        strSeparadoLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
+                        /*console.log(`i = ${i}, TamañoLocalStorage = ${localStorage.length},
+                        dato = ${localStorage.getItem(String(localStorage.key(i)))},
+                        typeOf LocalStorage = ${typeof localStorage},
+                        JSON.stringify = ${JSON.stringify(localStorage.getItem(String(localStorage.key(i))))},
+                        StringSeparado = ${strSeparado}`);*/
+                        //Agregando los datos separados al nuevo array
+                        for (var j = 0; j < strSeparadoLocalStorage.length; j++) {
+                            console.log("i: undefine = ".concat(i));
+                            //strSeparadoF[i][j] = strSeparadoLocalStorage[j];
+                            //console.log(`strSeparadoF = ${strSeparadoF}, strSeparadoF = ${strSeparadoF[i][j]}`);
+                        }
                     }
-            
-                    localStorage.setItem(this.obtenerDetalle + 'Valor', String(this.obtenerValor));
-            
-                    for (let i: number = 0; i < localStorage.length; i++) {
-                        console.log('LocalStorage: ' + localStorage.getItem(String(localStorage.key(i))));
+                    /*console.log(`strSeparado, Fuera del for: ${strSeparado.length},
+                    posición 1: ${strSeparado[0]},
+                    posición 2: ${strSeparado[1]},
+                    posición 3: ${strSeparado[2]}`);*/
+                    //Trayendo los gastos personales, por cada posición del LocalStorage
+                    /*for (let j: number = 0; j < 7; j++) {
+                        
+                        
                     }*/
                 };
                 return ProcesandoDatosUsu;
