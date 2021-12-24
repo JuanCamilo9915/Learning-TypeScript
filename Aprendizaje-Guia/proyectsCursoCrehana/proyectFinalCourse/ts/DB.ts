@@ -70,16 +70,19 @@ export class ProcesandoDatosUsu {
     }
 
     //Método que trae los datos del LocalStorage
-    public traerDatos(): void {
+    public traerDatos(): string[][] {
         //Trayendo datos del localStorage
-        let strSeparadoLocalStorage: string[] = [];//Creando el array para separar los datos del LocalStorage
-        let strSeparadoF: string[][] = [];//Creando la matriz que almacenará los datos del LocalStorage
+        let strSeparadoLocalStorage: string[] = new Array();//Creando el array para separar los datos del LocalStorage
+        //let strSeparadoF: string[][] = new Array();//Creando la matriz que almacenará los datos del LocalStorage
+        let strSeparadoF: string[][] = [[]];
 
         //Recorriendo el LocalStorage
         for (let i: number = 0; i < localStorage.length; i++) {
             //Separando los datos por cada posición del LocalStorage
-            strSeparadoLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
+            //strSeparadoLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
+            //strSeparadoLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
 
+            //Comentario
             /*console.log(`i = ${i}, TamañoLocalStorage = ${localStorage.length},
             dato = ${localStorage.getItem(String(localStorage.key(i)))},
             typeOf LocalStorage = ${typeof localStorage},
@@ -87,15 +90,19 @@ export class ProcesandoDatosUsu {
             StringSeparado = ${strSeparado}`);*/
 
             //Agregando los datos separados al nuevo array
-            for (let j = 0; j < strSeparadoLocalStorage.length; j++) {
-                console.log(`i: undefine = ${i}`);
+            //strSeparadoF.push(strSeparadoLocalStorage);
+            //console.log(`strSeparadoF: ${strSeparadoF}`);
+            /*for (let j = 0; j < strSeparadoLocalStorage.length; j++) {
+                console.log(`i(Test): ${i}`);
                 //strSeparadoF[i][j] = strSeparadoLocalStorage[j];
-                //console.log(`strSeparadoF = ${strSeparadoF}, strSeparadoF = ${strSeparadoF[i][j]}`);
-                
-            }
+                strSeparadoF.push(strSeparadoLocalStorage);
+                console.log(`strSeparadoF = ${strSeparadoF}, trSeparadoF 2 = ${strSeparadoF[i][j]}`);
+
+            }*/
 
         }
 
+        return strSeparadoF;
         /*console.log(`strSeparado, Fuera del for: ${strSeparado.length},
         posición 1: ${strSeparado[0]},
         posición 2: ${strSeparado[1]},
@@ -107,8 +114,30 @@ export class ProcesandoDatosUsu {
             
         }*/
 
+
+
     }
 
+    public traerDatosTest(): string[] {
+
+        let str: string = '';
+        let array1: string[] = [];
+
+        let array2: string[] = [];
+
+        for (let i: number = 0; i < localStorage.length; i++) {
+
+            array1 = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
+
+            array2.push(array1[0]);
+            array2.push(array1[1]);
+            array2.push(array1[2]);
+
+        }
+
+        return array2;
+
+    }
 
 
     /*this.enviarDetalle = String(localStorage.getItem('ServiciosPublicos'));

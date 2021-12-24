@@ -44,6 +44,11 @@ class RecibirDatos {
         valor.value = '';
 
         //Mostrar los datos enviados del LocalStorage
+        //console.log(`datosrecibidos: ${objExportDatosUsu.traerDatos()}`);
+        console.log(`testArray: ${objExportDatosUsu.traerDatosTest()}`);
+
+        console.log(`testArray[0]: ${objExportDatosUsu.traerDatosTest()[5]}`);
+
         console.log(`Detalles: ${objExportDatosUsu.obtenerDetalle},
         Opciones:  ${objExportDatosUsu.obtenerOption},
         Valor($$$): ${objExportDatosUsu.obtenerValor}`);
