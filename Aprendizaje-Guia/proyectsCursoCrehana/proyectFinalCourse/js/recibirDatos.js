@@ -46,7 +46,11 @@ System.register(["./DB.js"], function (exports_1, context_1) {
                     //Mostrar los datos enviados del LocalStorage
                     //console.log(`datosrecibidos: ${objExportDatosUsu.traerDatos()}`);
                     console.log("testArray: ".concat(objExportDatosUsu.traerDatosTest()));
-                    console.log("testArray[0]: ".concat(objExportDatosUsu.traerDatosTest()[5]));
+                    var strDarta = [];
+                    strDarta = objExportDatosUsu.traerDatosTest();
+                    for (var i = 0; i < strDarta.length; i++) {
+                        console.log("testArray[".concat(i, "]: ").concat(strDarta[i]));
+                    }
                     console.log("Detalles: ".concat(objExportDatosUsu.obtenerDetalle, ",\n        Opciones:  ").concat(objExportDatosUsu.obtenerOption, ",\n        Valor($$$): ").concat(objExportDatosUsu.obtenerValor));
                 };
                 return RecibirDatos;

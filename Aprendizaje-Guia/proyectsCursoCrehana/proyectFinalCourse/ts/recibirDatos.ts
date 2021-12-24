@@ -47,7 +47,15 @@ class RecibirDatos {
         //console.log(`datosrecibidos: ${objExportDatosUsu.traerDatos()}`);
         console.log(`testArray: ${objExportDatosUsu.traerDatosTest()}`);
 
-        console.log(`testArray[0]: ${objExportDatosUsu.traerDatosTest()[5]}`);
+        let strDarta: string[] = [];
+
+        strDarta = objExportDatosUsu.traerDatosTest();
+
+        for (let i = 0; i < strDarta.length; i++) {
+            
+            console.log(`testArray[${i}]: ${strDarta[i]}`);
+            
+        }
 
         console.log(`Detalles: ${objExportDatosUsu.obtenerDetalle},
         Opciones:  ${objExportDatosUsu.obtenerOption},
