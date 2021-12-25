@@ -11,7 +11,19 @@ const valor = document.getElementById('tres') as HTMLInputElement;
 const btn = document.getElementById('btn-submit') as HTMLButtonElement;
 
 //Clase recibirDatos
-class RecibirDatos {
+export class RecibirDatos {
+    /*//Atributo
+    private datosRecibidos: string[] = [];
+
+    //Métodos Get y Set
+    public get obtenerDatos(): string[] {
+        return this.datosRecibidos;
+    }
+
+    public set enviarDatos(datosRecibidosP: string[]) {
+        this.datosRecibidos = datosRecibidosP;
+    }*/
+
     //Método que inicia el evento de captura de datos
     public startApp(): void {
         //Escuchando el evento click del btn
@@ -25,6 +37,7 @@ class RecibirDatos {
         let noEspacios = new RegExp(' ','g');//Hace uso de una expresión regular
         let detalleU: String = detalle.value.replace(noEspacios, '');
 
+        //Mensaje de prueba
         console.log(`Detalle: ${detalleU}, Opcción: ${option.value}, valor: ${Number(valor.value)}`);
 
         //Instanciando el obj de la clase ProcesandoDatosUsu
@@ -43,24 +56,28 @@ class RecibirDatos {
         option.value = '';
         valor.value = '';
 
-        //Mostrar los datos enviados del LocalStorage
-        //console.log(`datosrecibidos: ${objExportDatosUsu.traerDatos()}`);
-        console.log(`testArray: ${objExportDatosUsu.traerDatosTest()}`);
-
-        let strDarta: string[] = [];
-
-        strDarta = objExportDatosUsu.traerDatosTest();
-
-        for (let i = 0; i < strDarta.length; i++) {
-            
-            console.log(`testArray[${i}]: ${strDarta[i]}`);
-            
-        }
+        //let a: string[] = 
+        //Se llama al método set de la clase
+        //this.enviarDatos = objExportDatosUsu.traerDatos();
 
         console.log(`Detalles: ${objExportDatosUsu.obtenerDetalle},
         Opciones:  ${objExportDatosUsu.obtenerOption},
         Valor($$$): ${objExportDatosUsu.obtenerValor}`);
 
+        //Mensaje de Prueba
+        //console.log(`ArrayIngresos: $${objExportDatosUsu.obtenerValorIngreso}, ArrayGastos -$${objExportDatosUsu.obtenerValorGasto}`);
+
+        //private totalSumaAcomulado: number | any;
+    }
+
+    //Método que muestra los datos enviados del LocalStorage
+    public mostrarDatosUsu(datosRecibidos: string[]): void {
+
+        for (let i = 0; i < datosRecibidos.length; i++) {
+            
+            console.log(`testArray[${i}]: ${datosRecibidos[i]}`);
+            
+        }
     }
 
 }

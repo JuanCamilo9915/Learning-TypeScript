@@ -20,6 +20,17 @@ System.register(["./DB.js"], function (exports_1, context_1) {
             RecibirDatos = /** @class */ (function () {
                 function RecibirDatos() {
                 }
+                /*//Atributo
+                private datosRecibidos: string[] = [];
+            
+                //Métodos Get y Set
+                public get obtenerDatos(): string[] {
+                    return this.datosRecibidos;
+                }
+            
+                public set enviarDatos(datosRecibidosP: string[]) {
+                    this.datosRecibidos = datosRecibidosP;
+                }*/
                 //Método que inicia el evento de captura de datos
                 RecibirDatos.prototype.startApp = function () {
                     //Escuchando el evento click del btn
@@ -30,6 +41,7 @@ System.register(["./DB.js"], function (exports_1, context_1) {
                     //Eliminan los espacios del string Detalle
                     var noEspacios = new RegExp(' ', 'g'); //Hace uso de una expresión regular
                     var detalleU = detalle.value.replace(noEspacios, '');
+                    //Mensaje de prueba
                     console.log("Detalle: ".concat(detalleU, ", Opcci\u00F3n: ").concat(option.value, ", valor: ").concat(Number(valor.value)));
                     //Instanciando el obj de la clase ProcesandoDatosUsu
                     var objExportDatosUsu = new DB_js_1.ProcesandoDatosUsu();
@@ -43,18 +55,23 @@ System.register(["./DB.js"], function (exports_1, context_1) {
                     detalle.value = '';
                     option.value = '';
                     valor.value = '';
-                    //Mostrar los datos enviados del LocalStorage
-                    //console.log(`datosrecibidos: ${objExportDatosUsu.traerDatos()}`);
-                    console.log("testArray: ".concat(objExportDatosUsu.traerDatosTest()));
-                    var strDarta = [];
-                    strDarta = objExportDatosUsu.traerDatosTest();
-                    for (var i = 0; i < strDarta.length; i++) {
-                        console.log("testArray[".concat(i, "]: ").concat(strDarta[i]));
-                    }
+                    //let a: string[] = 
+                    //Se llama al método set de la clase
+                    //this.enviarDatos = objExportDatosUsu.traerDatos();
                     console.log("Detalles: ".concat(objExportDatosUsu.obtenerDetalle, ",\n        Opciones:  ").concat(objExportDatosUsu.obtenerOption, ",\n        Valor($$$): ").concat(objExportDatosUsu.obtenerValor));
+                    //Mensaje de Prueba
+                    //console.log(`ArrayIngresos: $${objExportDatosUsu.obtenerValorIngreso}, ArrayGastos -$${objExportDatosUsu.obtenerValorGasto}`);
+                    //private totalSumaAcomulado: number | any;
+                };
+                //Método que muestra los datos enviados del LocalStorage
+                RecibirDatos.prototype.mostrarDatosUsu = function (datosRecibidos) {
+                    for (var i = 0; i < datosRecibidos.length; i++) {
+                        console.log("testArray[".concat(i, "]: ").concat(datosRecibidos[i]));
+                    }
                 };
                 return RecibirDatos;
             }());
+            exports_1("RecibirDatos", RecibirDatos);
             //Iniciando App
             //Instanciando el obj de la clase
             objRecibirDatos = new RecibirDatos();

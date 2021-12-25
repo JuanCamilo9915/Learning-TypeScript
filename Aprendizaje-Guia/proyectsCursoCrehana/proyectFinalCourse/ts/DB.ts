@@ -1,13 +1,16 @@
+//Importando Módulos
+import { RecibirDatos } from './recibirDatos.js';
+
 //Clase
 export class ProcesandoDatosUsu {
     //Atributos
     private detalleUsu: String | any;
     private optionUsu: string | any;
     private valorUsu: number | any;
-    //private totalSumaAcomulado: number | any;
+    private valorIngresoUsu: number[] | any = [];
+    private valorGastoUsu: number[] | any = [];
 
     //Constructor
-    //Forma # 1
     constructor(detalleP?: string, optionP?: string, valorP?: number) {
         this.detalleUsu = detalleP;
         this.optionUsu = optionP;
@@ -39,6 +42,22 @@ export class ProcesandoDatosUsu {
         this.valorUsu = valorP;
     }
 
+    public get obtenerValorIngreso(): number {
+        return this.valorIngresoUsu;
+    }
+
+    public set enviarValorIngreso(valorIngresoUsuP: number) {
+        this.valorIngresoUsu.push(valorIngresoUsuP);
+    }
+    
+    public get obtenerValorGasto(): number {
+        return this.valorGastoUsu;
+    }
+
+    public set enviarValorGasto(valorGastoUsuP: number) {
+        this.valorGastoUsu.push(valorGastoUsuP);
+    }
+
     //Método que almacena los datos en LocalStorage
     public guardarDatos(): void {
         //Guardando datos en localStorage
@@ -62,91 +81,65 @@ export class ProcesandoDatosUsu {
         //Se almacena el arreglo con los datos en el LocalStorage
         //localStorage.setItem(`datosUsu${this.obtenerDetalle}`, datosUsu);
 
-        console.log(`key: ${localStorage.getItem(String(localStorage.key(0)))}`);
+        //Mensaje de Prueba
+        //console.log(`key: ${localStorage.getItem(String(localStorage.key(0)))}`);
+
+        //INstancia del obj de la clase RecibiendoDatos
+        let datosRecibidos = new RecibirDatos();
 
         //Enviando los datos del LocalStorage a la tabla
-        this.traerDatos();
+        datosRecibidos.mostrarDatosUsu(this.traerDatos());
 
     }
 
     //Método que trae los datos del LocalStorage
-    public traerDatos(): string[][] {
-        //Trayendo datos del localStorage
-        let strSeparadoLocalStorage: string[] = new Array();//Creando el array para separar los datos del LocalStorage
-        //let strSeparadoF: string[][] = new Array();//Creando la matriz que almacenará los datos del LocalStorage
-        let strSeparadoF: string[][] = [[]];
+    public traerDatos(): string[] {
+        
+        let datosUsuLocalStorage: string[] = [];//Creando el array para separar los datos del LocalStorage
+
+        let envioDatosUsu: string[] = [];//Creando el array que almacenará los datos del LocalStorage
 
         //Recorriendo el LocalStorage
         for (let i: number = 0; i < localStorage.length; i++) {
-            //Separando los datos por cada posición del LocalStorage
-            //strSeparadoLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
-            //strSeparadoLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
 
-            //Comentario
-            /*console.log(`i = ${i}, TamañoLocalStorage = ${localStorage.length},
-            dato = ${localStorage.getItem(String(localStorage.key(i)))},
-            typeOf LocalStorage = ${typeof localStorage},
-            JSON.stringify = ${JSON.stringify(localStorage.getItem(String(localStorage.key(i))))},
-            StringSeparado = ${strSeparado}`);*/
+            //Trayendo datos del localStorage
+            //Separando los datos por cada posición del LocalStorage
+            datosUsuLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
 
             //Agregando los datos separados al nuevo array
-            //strSeparadoF.push(strSeparadoLocalStorage);
-            //console.log(`strSeparadoF: ${strSeparadoF}`);
-            /*for (let j = 0; j < strSeparadoLocalStorage.length; j++) {
-                console.log(`i(Test): ${i}`);
-                //strSeparadoF[i][j] = strSeparadoLocalStorage[j];
-                strSeparadoF.push(strSeparadoLocalStorage);
-                console.log(`strSeparadoF = ${strSeparadoF}, trSeparadoF 2 = ${strSeparadoF[i][j]}`);
+            envioDatosUsu.push(datosUsuLocalStorage[0]);
+            envioDatosUsu.push(datosUsuLocalStorage[1]);
+            envioDatosUsu.push(datosUsuLocalStorage[2]);
 
-            }*/
+            //Agregando los valores al tipo de array correspondinete
+            this.convirtiendoTipoDatoValor(datosUsuLocalStorage[1], parseInt(datosUsuLocalStorage[2]));
 
         }
-
-        return strSeparadoF;
-        /*console.log(`strSeparado, Fuera del for: ${strSeparado.length},
-        posición 1: ${strSeparado[0]},
-        posición 2: ${strSeparado[1]},
-        posición 3: ${strSeparado[2]}`);*/
-
-        //Trayendo los gastos personales, por cada posición del LocalStorage
-        /*for (let j: number = 0; j < 7; j++) {
-            
-            
-        }*/
-
-
-
+        
+        return envioDatosUsu;
+        
     }
 
-    public traerDatosTest(): string[] {
+    public convirtiendoTipoDatoValor(positionUnoP: string, positionDosP: number): void {
 
-        let str: string = '';
-        let array1: string[] = [];
-
-        let array2: string[] = [];
-
-        for (let i: number = 0; i < localStorage.length; i++) {
-
-            array1 = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
-
-            array2.push(array1[0]);
-            array2.push(array1[1]);
-            array2.push(array1[2]);
-
+        //Evalua si el tipo es Ingreso ó Gasto
+        switch (positionUnoP) {
+            case 'Ingreso':
+                //this.valorIngresoUsu.push(positionDosP);
+                this.enviarValorIngreso = this.valorIngresoUsu;
+                console.log(`case: 1-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
+                break;
+        
+            default:
+                //this.valorGastoUsu.push(positionDosP);
+                this.enviarValorGasto = this.valorGastoUsu;
+                console.log(`default: 2-Tipo: $${positionUnoP}, Valor -$${positionDosP}`);
+                break;
         }
-
-        return array2;
-
+        
     }
 
-
-    /*this.enviarDetalle = String(localStorage.getItem('ServiciosPublicos'));
-    this.enviarOption = String(localStorage.getItem('ServiciosPublicosGasto'));
-    this.enviarDetalle = String(localStorage.key(0));
-    this.enviarOption = String(localStorage.key(1));*/
 
     //Convirtiendo el tipo de dato de valorLocalStorage
-    /*this.enviarValor = parseInt(String(localStorage.getItem('ServiciosPublicosValor')), 10);
-    this.enviarValor = parseInt(String(localStorage.key(2)));*/
 
 }
