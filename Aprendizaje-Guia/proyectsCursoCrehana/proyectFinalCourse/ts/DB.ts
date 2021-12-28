@@ -7,6 +7,7 @@ export class ProcesandoDatosUsu {
     private detalleUsu: String | any;
     private optionUsu: string | any;
     private valorUsu: number | any;
+    //Atributos tipo array que almacenan los valores como tipo number
     private valorIngresoUsu: number[] | any = [];
     private valorGastoUsu: number[] | any = [];
 
@@ -42,7 +43,8 @@ export class ProcesandoDatosUsu {
         this.valorUsu = valorP;
     }
 
-    public get obtenerValorIngreso(): number {
+    //Métodos Set y Get de los valores
+    public get obtenerValorIngreso(): number[] {
         return this.valorIngresoUsu;
     }
 
@@ -50,7 +52,7 @@ export class ProcesandoDatosUsu {
         this.valorIngresoUsu.push(valorIngresoUsuP);
     }
     
-    public get obtenerValorGasto(): number {
+    public get obtenerValorGasto(): number[] {
         return this.valorGastoUsu;
     }
 
@@ -64,22 +66,22 @@ export class ProcesandoDatosUsu {
         let datosUsu: string[] | any = [];//Se declara el arreglo datosUsu
 
         //Almacenan los datos en el arreglo
-        //datosUsu.push(this.obtenerDetalle);
+        datosUsu.push(this.obtenerDetalle);
 
         switch (this.obtenerOption) {
             case '1':
-                //datosUsu.push('Ingreso');        
+                datosUsu.push('Ingreso');        
                 break;
 
             default:
-                //datosUsu.push('Gasto');
+                datosUsu.push('Gasto');
                 break;
         }
 
-        //datosUsu.push(this.obtenerValor);
+        datosUsu.push(this.obtenerValor);
 
         //Se almacena el arreglo con los datos en el LocalStorage
-        //localStorage.setItem(`datosUsu${this.obtenerDetalle}`, datosUsu);
+        localStorage.setItem(`datosUsu${this.obtenerDetalle}`, datosUsu);
 
         //Mensaje de Prueba
         //console.log(`key: ${localStorage.getItem(String(localStorage.key(0)))}`);
@@ -89,6 +91,10 @@ export class ProcesandoDatosUsu {
 
         //Enviando los datos del LocalStorage a la tabla
         datosRecibidos.mostrarDatosUsu(this.traerDatos());
+
+        //Enviando los arreglos de ingresos y gastos
+        datosRecibidos.arrayIngresos(this.obtenerValorIngreso);
+        datosRecibidos.arrayGastos(this.obtenerValorGasto);
 
     }
 
@@ -120,26 +126,24 @@ export class ProcesandoDatosUsu {
         
     }
 
+    //Método que convierte el tipo de dato de valorLocalStorage
     public convirtiendoTipoDatoValor(positionUnoP: string, positionDosP: number): void {
 
         //Evalua si el tipo es Ingreso ó Gasto
         switch (positionUnoP) {
             case 'Ingreso':
-                //this.valorIngresoUsu.push(positionDosP);
-                this.enviarValorIngreso = this.valorIngresoUsu;
-                console.log(`case: 1-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
+                this.enviarValorIngreso = positionDosP;
+                //Mensaje de Prueba
+                //console.log(`case: 1-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
                 break;
         
             default:
-                //this.valorGastoUsu.push(positionDosP);
-                this.enviarValorGasto = this.valorGastoUsu;
-                console.log(`default: 2-Tipo: $${positionUnoP}, Valor -$${positionDosP}`);
+                this.enviarValorGasto = positionDosP;
+                //Mensaje de Prueba
+                //console.log(`default: 2-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
                 break;
         }
         
     }
-
-
-    //Convirtiendo el tipo de dato de valorLocalStorage
 
 }

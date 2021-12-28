@@ -10,116 +10,81 @@ System.register(["./recibirDatos.js"], function (exports_1, context_1) {
         ],
         execute: function () {
             //Clase
-            ProcesandoDatosUsu = /** @class */ (function () {
+            ProcesandoDatosUsu = class ProcesandoDatosUsu {
                 //Constructor
-                function ProcesandoDatosUsu(detalleP, optionP, valorP) {
+                constructor(detalleP, optionP, valorP) {
+                    //Atributos tipo array que almacenan los valores como tipo number
                     this.valorIngresoUsu = [];
                     this.valorGastoUsu = [];
                     this.detalleUsu = detalleP;
                     this.optionUsu = optionP;
                     this.valorUsu = valorP;
                 }
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "obtenerDetalle", {
-                    //Métodos Get y Set
-                    get: function () {
-                        return this.detalleUsu;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "enviarDetalle", {
-                    set: function (detalleP) {
-                        this.detalleUsu = detalleP;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "obtenerOption", {
-                    get: function () {
-                        return this.optionUsu;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "enviarOption", {
-                    set: function (optionP) {
-                        this.optionUsu = optionP;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "obtenerValor", {
-                    get: function () {
-                        return this.valorUsu;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "enviarValor", {
-                    set: function (valorP) {
-                        this.valorUsu = valorP;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "obtenerValorIngreso", {
-                    get: function () {
-                        return this.valorIngresoUsu;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "enviarValorIngreso", {
-                    set: function (valorIngresoUsuP) {
-                        this.valorIngresoUsu.push(valorIngresoUsuP);
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "obtenerValorGasto", {
-                    get: function () {
-                        return this.valorGastoUsu;
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
-                Object.defineProperty(ProcesandoDatosUsu.prototype, "enviarValorGasto", {
-                    set: function (valorGastoUsuP) {
-                        this.valorGastoUsu.push(valorGastoUsuP);
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
+                //Métodos Get y Set
+                get obtenerDetalle() {
+                    return this.detalleUsu;
+                }
+                set enviarDetalle(detalleP) {
+                    this.detalleUsu = detalleP;
+                }
+                get obtenerOption() {
+                    return this.optionUsu;
+                }
+                set enviarOption(optionP) {
+                    this.optionUsu = optionP;
+                }
+                get obtenerValor() {
+                    return this.valorUsu;
+                }
+                set enviarValor(valorP) {
+                    this.valorUsu = valorP;
+                }
+                //Métodos Set y Get de los valores
+                get obtenerValorIngreso() {
+                    return this.valorIngresoUsu;
+                }
+                set enviarValorIngreso(valorIngresoUsuP) {
+                    this.valorIngresoUsu.push(valorIngresoUsuP);
+                }
+                get obtenerValorGasto() {
+                    return this.valorGastoUsu;
+                }
+                set enviarValorGasto(valorGastoUsuP) {
+                    this.valorGastoUsu.push(valorGastoUsuP);
+                }
                 //Método que almacena los datos en LocalStorage
-                ProcesandoDatosUsu.prototype.guardarDatos = function () {
+                guardarDatos() {
                     //Guardando datos en localStorage
-                    var datosUsu = []; //Se declara el arreglo datosUsu
+                    let datosUsu = []; //Se declara el arreglo datosUsu
                     //Almacenan los datos en el arreglo
-                    //datosUsu.push(this.obtenerDetalle);
+                    datosUsu.push(this.obtenerDetalle);
                     switch (this.obtenerOption) {
                         case '1':
-                            //datosUsu.push('Ingreso');        
+                            datosUsu.push('Ingreso');
                             break;
                         default:
-                            //datosUsu.push('Gasto');
+                            datosUsu.push('Gasto');
                             break;
                     }
-                    //datosUsu.push(this.obtenerValor);
+                    datosUsu.push(this.obtenerValor);
                     //Se almacena el arreglo con los datos en el LocalStorage
-                    //localStorage.setItem(`datosUsu${this.obtenerDetalle}`, datosUsu);
+                    localStorage.setItem(`datosUsu${this.obtenerDetalle}`, datosUsu);
                     //Mensaje de Prueba
                     //console.log(`key: ${localStorage.getItem(String(localStorage.key(0)))}`);
                     //INstancia del obj de la clase RecibiendoDatos
-                    var datosRecibidos = new recibirDatos_js_1.RecibirDatos();
+                    let datosRecibidos = new recibirDatos_js_1.RecibirDatos();
                     //Enviando los datos del LocalStorage a la tabla
                     datosRecibidos.mostrarDatosUsu(this.traerDatos());
-                };
+                    //Enviando los arreglos de ingresos y gastos
+                    datosRecibidos.arrayIngresos(this.obtenerValorIngreso);
+                    datosRecibidos.arrayGastos(this.obtenerValorGasto);
+                }
                 //Método que trae los datos del LocalStorage
-                ProcesandoDatosUsu.prototype.traerDatos = function () {
-                    var datosUsuLocalStorage = []; //Creando el array para separar los datos del LocalStorage
-                    var envioDatosUsu = []; //Creando el array que almacenará los datos del LocalStorage
+                traerDatos() {
+                    let datosUsuLocalStorage = []; //Creando el array para separar los datos del LocalStorage
+                    let envioDatosUsu = []; //Creando el array que almacenará los datos del LocalStorage
                     //Recorriendo el LocalStorage
-                    for (var i = 0; i < localStorage.length; i++) {
+                    for (let i = 0; i < localStorage.length; i++) {
                         //Trayendo datos del localStorage
                         //Separando los datos por cada posición del LocalStorage
                         datosUsuLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
@@ -131,24 +96,24 @@ System.register(["./recibirDatos.js"], function (exports_1, context_1) {
                         this.convirtiendoTipoDatoValor(datosUsuLocalStorage[1], parseInt(datosUsuLocalStorage[2]));
                     }
                     return envioDatosUsu;
-                };
-                ProcesandoDatosUsu.prototype.convirtiendoTipoDatoValor = function (positionUnoP, positionDosP) {
+                }
+                //Método que convierte el tipo de dato de valorLocalStorage
+                convirtiendoTipoDatoValor(positionUnoP, positionDosP) {
                     //Evalua si el tipo es Ingreso ó Gasto
                     switch (positionUnoP) {
                         case 'Ingreso':
-                            //this.valorIngresoUsu.push(positionDosP);
-                            this.enviarValorIngreso = this.valorIngresoUsu;
-                            console.log("case: 1-Tipo: ".concat(positionUnoP, ", Valor -$").concat(positionDosP));
+                            this.enviarValorIngreso = positionDosP;
+                            //Mensaje de Prueba
+                            //console.log(`case: 1-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
                             break;
                         default:
-                            //this.valorGastoUsu.push(positionDosP);
-                            this.enviarValorGasto = this.valorGastoUsu;
-                            console.log("default: 2-Tipo: $".concat(positionUnoP, ", Valor -$").concat(positionDosP));
+                            this.enviarValorGasto = positionDosP;
+                            //Mensaje de Prueba
+                            //console.log(`default: 2-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
                             break;
                     }
-                };
-                return ProcesandoDatosUsu;
-            }());
+                }
+            };
             exports_1("ProcesandoDatosUsu", ProcesandoDatosUsu);
         }
     };

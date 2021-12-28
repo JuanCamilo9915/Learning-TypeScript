@@ -1,28 +1,21 @@
 //Importando Módulos
 import { ProcesandoDatosUsu } from './DB.js';
 
-/*Seleccionan los campos de texto.
+/*Seleccionando los campos de texto.
 /*Declarando y definiendo las siguientes variables.*/
 const detalle = document.getElementById('uno') as HTMLInputElement;//Utilizando Aserción de tipo
 const option = document.getElementById('dos') as HTMLSelectElement;
 const valor = document.getElementById('tres') as HTMLInputElement;
+
+/*Seleccionando la tabla*/
+const tablaGastosPersonales = document.getElementById('get-table') as HTMLTableElement;
+const filasTablaGastos = document.querySelector('#get-table #filas-tabla-gastos') as HTMLTableElement;
 
 //Btn
 const btn = document.getElementById('btn-submit') as HTMLButtonElement;
 
 //Clase recibirDatos
 export class RecibirDatos {
-    /*//Atributo
-    private datosRecibidos: string[] = [];
-
-    //Métodos Get y Set
-    public get obtenerDatos(): string[] {
-        return this.datosRecibidos;
-    }
-
-    public set enviarDatos(datosRecibidosP: string[]) {
-        this.datosRecibidos = datosRecibidosP;
-    }*/
 
     //Método que inicia el evento de captura de datos
     public startApp(): void {
@@ -34,7 +27,7 @@ export class RecibirDatos {
     public recibiendoDatos(): void {
 
         //Eliminan los espacios del string Detalle
-        let noEspacios = new RegExp(' ','g');//Hace uso de una expresión regular
+        let noEspacios = new RegExp(' ', 'g');//Hace uso de una expresión regular
         let detalleU: String = detalle.value.replace(noEspacios, '');
 
         //Mensaje de prueba
@@ -56,16 +49,13 @@ export class RecibirDatos {
         option.value = '';
         valor.value = '';
 
-        //let a: string[] = 
-        //Se llama al método set de la clase
-        //this.enviarDatos = objExportDatosUsu.traerDatos();
-
-        console.log(`Detalles: ${objExportDatosUsu.obtenerDetalle},
-        Opciones:  ${objExportDatosUsu.obtenerOption},
-        Valor($$$): ${objExportDatosUsu.obtenerValor}`);
-
         //Mensaje de Prueba
-        //console.log(`ArrayIngresos: $${objExportDatosUsu.obtenerValorIngreso}, ArrayGastos -$${objExportDatosUsu.obtenerValorGasto}`);
+        //console.log(`ArrayIngresos: $${objExportDatosUsu.obtenerValorIngreso}, ArrayGastos -$${objExportDatosUsu.obtenerValorGasto}`);       }
+        //Llamando al método Ingresos
+        //this.arrayIngresos();
+
+        //Llamando al método Gastos
+
 
         //private totalSumaAcomulado: number | any;
     }
@@ -73,11 +63,90 @@ export class RecibirDatos {
     //Método que muestra los datos enviados del LocalStorage
     public mostrarDatosUsu(datosRecibidos: string[]): void {
 
-        for (let i = 0; i < datosRecibidos.length; i++) {
-            
-            console.log(`testArray[${i}]: ${datosRecibidos[i]}`);
-            
+        /*console.log('fuera del if: ' + datosRecibidos.length);
+        if (datosRecibidos[0] != null) {
+            console.log('dentro del if');
+            datosRecibidos = [];
+            console.log('despues de basiar el arreglo');
         }
+        console.log('saliendo del if');*/
+        const filasTablaGastos = document.querySelector('#get-table #filas-tabla-gastos') as HTMLTableElement;
+
+        //if (filasTablaGastos != null) {
+        console.log('filasTablaGastos: ' + filasTablaGastos);
+        filasTablaGastos.innerHTML = '';
+        //console.log('tablaGastosPersonales: ' + tablaGastosPersonales);
+        //tablaGastosPersonales.innerHTML = '';
+        //filasTablaGastos.remove();
+        //}
+
+        //Se declara el atributo de la fila
+        let filaTabla: any;
+
+        //Control de posiciones
+        let iteration: Number | any = 1;
+
+        for (let i = 0; i < datosRecibidos.length; i++) {
+
+            //Mensaje de Prueba
+            console.log(`DatosTabla[${i}]: ${datosRecibidos[i]}, iteration: ${iteration}`);
+
+            //Agregando una fila a la tabla
+            if (iteration == 1) {
+                //filaTabla = tablaGastosPersonales.insertRow();
+                filaTabla = filasTablaGastos.insertRow();
+            }
+
+            switch (iteration) {
+                case 1:
+                    //Agregando columnas a cada fila de la tabla
+                    let colDetalle = filaTabla.insertCell(0);
+
+                    colDetalle.innerHTML = datosRecibidos[i];
+                    break;
+
+                case 2:
+                    let colTipo = filaTabla.insertCell(1);
+
+                    colTipo.innerHTML = datosRecibidos[i];
+                    break;
+
+                default:
+                    let colValor = filaTabla.insertCell(2);
+
+                    colValor.innerHTML = datosRecibidos[i];
+
+                    iteration = 0;
+                    break;
+
+            }
+
+            iteration++;
+
+        }
+
+    }
+
+    public arrayIngresos(ingresosRecibidos: number[]): void {
+
+        for (let i = 0; i < ingresosRecibidos.length; i++) {
+
+            console.log(`IngresosTabla[${i}]: ${ingresosRecibidos[i]}`);
+
+        }
+
+        console.log('\n');
+
+    }
+
+    public arrayGastos(gastosRecibidos: number[]): void {
+
+        for (let i = 0; i < gastosRecibidos.length; i++) {
+
+            console.log(`GastossTabla[${i}]: ${gastosRecibidos[i]}`);
+
+        }
+
     }
 
 }
