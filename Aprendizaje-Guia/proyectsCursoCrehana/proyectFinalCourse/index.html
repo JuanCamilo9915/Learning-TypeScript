@@ -46,22 +46,22 @@
 
         </section>
 
-        <!--Visualización de los Datos--->
+        <!--Tabla de Visualización de los Datos--->
         <section class="get-datos">
+
             <!--Mostrando Datos-->
             <table id="get-table">
                 <thead>
+                    <th>N°</th>
                     <th>Detalle</th>
                     <th>Tipo</th>
                     <th>Valor($)</th>
                 </thead>
 
-                <tbody id="filas-tabla-gastos"></tbody>
+                <tbody></tbody>
             </table>
 
-            <!--Total de Ingresos Netos-->
-            <!--Tenerlo en cuenta: https://www.youtube.com/watch?v=mIqk71QQZMU,
-            repo de ejemplo: https://github.com/HemisferioDev/exercise-sortarrayts-->
+            <!--Tabla del Total de Ingresos Netos-->
             <table id="get-table-2">
                 <thead>
                     <th>Total Ingresos</th>
@@ -69,15 +69,11 @@
                     <th>Total Ingresos Netos</th>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td>$$$</td>
-                        <td>$$$</td>
-                        <td>$$$</td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
+
         </section>
+
     </main>
     <!--------------------------------------------------Footer-------------------------------------------------->
     <footer>
@@ -96,11 +92,7 @@
         </script>
     <!-- Alternatively:-->
     <script type="systemjs-module" src="import:app"></script>
-    <!---------------------------------------------->
-
-    <!-------------Importando Código JS-------------
-    <script type="module" src="./js/recibirDatos.js"></script> - - > no es necesario, porque se esta llamando con SystemJS
-    ---------------------------------------------->
+    <!------------------------------------------------------------------->
 </body>
 
 </html>

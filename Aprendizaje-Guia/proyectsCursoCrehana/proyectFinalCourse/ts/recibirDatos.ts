@@ -1,42 +1,49 @@
 //Importando Módulos
 import { ProcesandoDatosUsu } from './DB.js';
 
-/*Seleccionando los campos de texto.
-/*Declarando y definiendo las siguientes variables.*/
+/*Seleccionando los campos de texto*/
 const detalle = document.getElementById('uno') as HTMLInputElement;//Utilizando Aserción de tipo
 const option = document.getElementById('dos') as HTMLSelectElement;
 const valor = document.getElementById('tres') as HTMLInputElement;
 
-/*Seleccionando la tabla*/
-const tablaGastosPersonales = document.getElementById('get-table') as HTMLTableElement;
-const filasTablaGastos = document.querySelector('#get-table #filas-tabla-gastos') as HTMLTableElement;
+/*Seleccionando la tabla de visualización de datos*/
+const tablaGastosPersonales = document.querySelector('#get-table tbody') as HTMLTableElement;
+
+/*Seleccionando la tabla de visualización del total de ingresos*/
+const tablaTotalIngresos = document.querySelector('#get-table-2 tbody') as HTMLTableElement;
 
 //Btn
 const btn = document.getElementById('btn-submit') as HTMLButtonElement;
 
-//Clase recibirDatos
 export class RecibirDatos {
 
     //Método que inicia el evento de captura de datos
     public startApp(): void {
-        //Escuchando el evento click del btn
+
+        //Instanciando el obj de la clase ProcesandoDatosUsu
+        const objExportDatosUsu = new ProcesandoDatosUsu();
+
+        //Muestra los datos alamacenados al iniciar la app
+        this.mostrarDatosUsu(objExportDatosUsu.traerDatos());
+
+        //Muestra el total de ingresos y gastos
+        this.totalIngresosNetos(objExportDatosUsu.obtenerValorIngreso, objExportDatosUsu.obtenerValorGasto);
+
+        //Registrando el nuevo detalle, por medio del evento 'Click' del btn
         btn.addEventListener('click', this.recibiendoDatos);
     }
 
     //Método que recibe los datos ingresados por el usuario
     public recibiendoDatos(): void {
 
-        //Eliminan los espacios del string Detalle
+        //Eliminando los espacios del string Detalle
         let noEspacios = new RegExp(' ', 'g');//Hace uso de una expresión regular
         let detalleU: String = detalle.value.replace(noEspacios, '');
-
-        //Mensaje de prueba
-        console.log(`Detalle: ${detalleU}, Opcción: ${option.value}, valor: ${Number(valor.value)}`);
 
         //Instanciando el obj de la clase ProcesandoDatosUsu
         const objExportDatosUsu = new ProcesandoDatosUsu();
 
-        //Enviando los datos con sus métodos set
+        //Enviando los datos por medio de los métodos set
         objExportDatosUsu.enviarDetalle = String(detalleU);
         objExportDatosUsu.enviarOption = option.value;
         objExportDatosUsu.enviarValor = Number(valor.value);
@@ -44,75 +51,57 @@ export class RecibirDatos {
         //llamando al método guardar del obj ProcesandoDatosUsu
         objExportDatosUsu.guardarDatos();
 
-        //Limpiando los campos de texto
+        //Se limpian los campos de texto
         detalle.value = '';
         option.value = '';
         valor.value = '';
 
-        //Mensaje de Prueba
-        //console.log(`ArrayIngresos: $${objExportDatosUsu.obtenerValorIngreso}, ArrayGastos -$${objExportDatosUsu.obtenerValorGasto}`);       }
-        //Llamando al método Ingresos
-        //this.arrayIngresos();
-
-        //Llamando al método Gastos
-
-
-        //private totalSumaAcomulado: number | any;
     }
 
     //Método que muestra los datos enviados del LocalStorage
     public mostrarDatosUsu(datosRecibidos: string[]): void {
 
-        /*console.log('fuera del if: ' + datosRecibidos.length);
-        if (datosRecibidos[0] != null) {
-            console.log('dentro del if');
-            datosRecibidos = [];
-            console.log('despues de basiar el arreglo');
-        }
-        console.log('saliendo del if');*/
-        const filasTablaGastos = document.querySelector('#get-table #filas-tabla-gastos') as HTMLTableElement;
-
-        //if (filasTablaGastos != null) {
-        console.log('filasTablaGastos: ' + filasTablaGastos);
-        filasTablaGastos.innerHTML = '';
-        //console.log('tablaGastosPersonales: ' + tablaGastosPersonales);
-        //tablaGastosPersonales.innerHTML = '';
-        //filasTablaGastos.remove();
-        //}
+        //Limpia la tabla para mostrar los datos
+        tablaGastosPersonales.innerHTML = '';
 
         //Se declara el atributo de la fila
         let filaTabla: any;
 
-        //Control de posiciones
+        //Controla las posiciones de las columnas, por cada fila creada
         let iteration: Number | any = 1;
 
+        //N° de cada fila
+        let numFila: number = 0;
+
+        //Recorre el arreglo con los datos enviados del LocalStorage
         for (let i = 0; i < datosRecibidos.length; i++) {
 
-            //Mensaje de Prueba
-            console.log(`DatosTabla[${i}]: ${datosRecibidos[i]}, iteration: ${iteration}`);
-
-            //Agregando una fila a la tabla
+            //Evalua si la fila ya tiene completas sus columnas para crear una nueva fila
             if (iteration == 1) {
-                //filaTabla = tablaGastosPersonales.insertRow();
-                filaTabla = filasTablaGastos.insertRow();
+                filaTabla = tablaGastosPersonales.insertRow();//crea una nueva fila
+
+                //Agrega el N° idicativo a cada fila
+                let numFilaTabla = filaTabla.insertCell(0);
+
+                numFilaTabla.innerHTML = ++numFila;
             }
 
+            //Agrega columnas a la fila de la tabla, de forma dinámica
             switch (iteration) {
                 case 1:
-                    //Agregando columnas a cada fila de la tabla
-                    let colDetalle = filaTabla.insertCell(0);
+                    let colDetalle = filaTabla.insertCell(1);
 
                     colDetalle.innerHTML = datosRecibidos[i];
                     break;
 
                 case 2:
-                    let colTipo = filaTabla.insertCell(1);
+                    let colTipo = filaTabla.insertCell(2);
 
                     colTipo.innerHTML = datosRecibidos[i];
                     break;
 
                 default:
-                    let colValor = filaTabla.insertCell(2);
+                    let colValor = filaTabla.insertCell(3);
 
                     colValor.innerHTML = datosRecibidos[i];
 
@@ -127,32 +116,55 @@ export class RecibirDatos {
 
     }
 
-    public arrayIngresos(ingresosRecibidos: number[]): void {
+    //Método que muestra los ingresos, gastos e ingresos netos
+    public totalIngresosNetos(ingresosRecibidos: number[], gastosRecibidos: number[]): void {
 
+        //Limpiando la tabla para mostrar los valores
+        tablaTotalIngresos.innerHTML = '';
+
+        //Creando la fila
+        let filaEstatica = tablaTotalIngresos.insertRow(0);
+
+        //creando las columnas
+        let totalIngresos = filaEstatica.insertCell(0);
+        let totalGastos = filaEstatica.insertCell(1);
+        let totalIngresosNetos = filaEstatica.insertCell(2);
+
+        //Acumuladores
+        let sumaIngresos: number = 0;
+        let sumaGastos: number = 0;
+        let resultNeto: number = 0;
+
+        //Recorriendo el array de los Ingresos
         for (let i = 0; i < ingresosRecibidos.length; i++) {
 
-            console.log(`IngresosTabla[${i}]: ${ingresosRecibidos[i]}`);
+            //Sumando todos los ingresos
+            sumaIngresos += ingresosRecibidos[i];
 
         }
 
-        console.log('\n');
-
-    }
-
-    public arrayGastos(gastosRecibidos: number[]): void {
-
+        //Recorriendo el array de los Gastos
         for (let i = 0; i < gastosRecibidos.length; i++) {
 
-            console.log(`GastossTabla[${i}]: ${gastosRecibidos[i]}`);
+            //Sumando todos los gastos
+            sumaGastos += gastosRecibidos[i];
 
         }
 
+        //Restando la suma de los gastos al de los ingresos
+        resultNeto = sumaIngresos - sumaGastos;
+
+        //Mostrando los resultados
+        totalIngresos.innerHTML = '$' + String(sumaIngresos);
+        totalGastos.innerHTML = "$" + String(sumaGastos);
+        totalIngresosNetos.innerHTML = `$ ${String(resultNeto)}`;
+        
     }
 
 }
 
-//Iniciando App
 //Instanciando el obj de la clase
 const objRecibirDatos = new RecibirDatos();
 
+//Iniciando App
 objRecibirDatos.startApp();

@@ -1,14 +1,12 @@
 //Importando Módulos
 import { RecibirDatos } from './recibirDatos.js';
 
-//Clase
 export class ProcesandoDatosUsu {
     //Atributos
     private detalleUsu: String | any;
     private optionUsu: string | any;
     private valorUsu: number | any;
-    //Atributos tipo array que almacenan los valores como tipo number
-    private valorIngresoUsu: number[] | any = [];
+    private valorIngresoUsu: number[] | any = [];//Atributos tipo array que almacenan los valores como tipo number
     private valorGastoUsu: number[] | any = [];
 
     //Constructor
@@ -43,7 +41,7 @@ export class ProcesandoDatosUsu {
         this.valorUsu = valorP;
     }
 
-    //Métodos Set y Get de los valores
+    //Métodos Set y Get de los valores(Ingresos ó Gastos)
     public get obtenerValorIngreso(): number[] {
         return this.valorIngresoUsu;
     }
@@ -62,12 +60,13 @@ export class ProcesandoDatosUsu {
 
     //Método que almacena los datos en LocalStorage
     public guardarDatos(): void {
-        //Guardando datos en localStorage
+        
         let datosUsu: string[] | any = [];//Se declara el arreglo datosUsu
 
-        //Almacenan los datos en el arreglo
+        //Se almacenan los datos en el arreglo
         datosUsu.push(this.obtenerDetalle);
 
+        //Evalua si es un Ingreso ó Gasto
         switch (this.obtenerOption) {
             case '1':
                 datosUsu.push('Ingreso');        
@@ -80,21 +79,17 @@ export class ProcesandoDatosUsu {
 
         datosUsu.push(this.obtenerValor);
 
-        //Se almacena el arreglo con los datos en el LocalStorage
+        //Guardando datos en localStorage
         localStorage.setItem(`datosUsu${this.obtenerDetalle}`, datosUsu);
 
-        //Mensaje de Prueba
-        //console.log(`key: ${localStorage.getItem(String(localStorage.key(0)))}`);
-
-        //INstancia del obj de la clase RecibiendoDatos
+        //Instancia del obj de la clase RecibiendoDatos
         let datosRecibidos = new RecibirDatos();
 
-        //Enviando los datos del LocalStorage a la tabla
+        //Enviando los datos del LocalStorage a la tabla # 1
         datosRecibidos.mostrarDatosUsu(this.traerDatos());
 
-        //Enviando los arreglos de ingresos y gastos
-        datosRecibidos.arrayIngresos(this.obtenerValorIngreso);
-        datosRecibidos.arrayGastos(this.obtenerValorGasto);
+        //Enviando los arreglos de ingresos y gastos del LocalStorage a la tabla # 2
+        datosRecibidos.totalIngresosNetos(this.obtenerValorIngreso, this.obtenerValorGasto);
 
     }
 
@@ -103,7 +98,7 @@ export class ProcesandoDatosUsu {
         
         let datosUsuLocalStorage: string[] = [];//Creando el array para separar los datos del LocalStorage
 
-        let envioDatosUsu: string[] = [];//Creando el array que almacenará los datos del LocalStorage
+        let envioDatosUsu: string[] = [];//Creando el array que almacenará los datos separados del LocalStorage
 
         //Recorriendo el LocalStorage
         for (let i: number = 0; i < localStorage.length; i++) {
@@ -112,12 +107,12 @@ export class ProcesandoDatosUsu {
             //Separando los datos por cada posición del LocalStorage
             datosUsuLocalStorage = JSON.stringify(localStorage.getItem(String(localStorage.key(i)))).split(',');
 
-            //Agregando los datos separados al nuevo array
+            //Agregando los datos separados al array envioDatosUsu
             envioDatosUsu.push(datosUsuLocalStorage[0]);
             envioDatosUsu.push(datosUsuLocalStorage[1]);
             envioDatosUsu.push(datosUsuLocalStorage[2]);
 
-            //Agregando los valores al tipo de array correspondinete
+            //Agregando los valores al tipo de array correspondinete(Ingresos o Gastos)
             this.convirtiendoTipoDatoValor(datosUsuLocalStorage[1], parseInt(datosUsuLocalStorage[2]));
 
         }
@@ -126,21 +121,17 @@ export class ProcesandoDatosUsu {
         
     }
 
-    //Método que convierte el tipo de dato de valorLocalStorage
+    //Método que convierte el tipo de dato del valor del LocalStorage
     public convirtiendoTipoDatoValor(positionUnoP: string, positionDosP: number): void {
 
         //Evalua si el tipo es Ingreso ó Gasto
         switch (positionUnoP) {
             case 'Ingreso':
-                this.enviarValorIngreso = positionDosP;
-                //Mensaje de Prueba
-                //console.log(`case: 1-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
+                this.enviarValorIngreso = positionDosP;//Enviando datos por medio del método Set
                 break;
         
             default:
-                this.enviarValorGasto = positionDosP;
-                //Mensaje de Prueba
-                //console.log(`default: 2-Tipo: ${positionUnoP}, Valor -$${positionDosP}`);
+                this.enviarValorGasto = positionDosP;//Enviando datos por medio del método Set
                 break;
         }
         
