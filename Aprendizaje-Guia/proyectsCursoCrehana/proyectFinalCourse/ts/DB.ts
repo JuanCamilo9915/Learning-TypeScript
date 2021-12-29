@@ -127,11 +127,11 @@ export class ProcesandoDatosUsu {
         //Evalua si el tipo es Ingreso ó Gasto
         switch (positionUnoP) {
             case 'Ingreso':
-                this.enviarValorIngreso = positionDosP;//Enviando datos por medio del método Set
+                this.enviarValorIngreso = positionDosP;//Enviando ingresos por medio del método Set
                 break;
         
             default:
-                this.enviarValorGasto = positionDosP;//Enviando datos por medio del método Set
+                this.enviarValorGasto = positionDosP;//Enviando gastos por medio del método Set
                 break;
         }
         
